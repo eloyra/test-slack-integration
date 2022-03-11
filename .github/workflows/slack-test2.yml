@@ -45,7 +45,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "```${{ toJSON(steps.get_release.outputs.body) }}```"
+                    "text": ${{ join(["```", toJSON(steps.get_release.outputs.body), "```") }}
                   }
                 },
                 {
