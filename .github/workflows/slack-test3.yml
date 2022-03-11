@@ -42,4 +42,4 @@ jobs:
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
 
       - name: Check
-        run: echo "Data"
+        run: echo ${{ fromJson(steps.send_message.outputs) }}
