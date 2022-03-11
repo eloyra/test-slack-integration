@@ -22,7 +22,9 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_CHANNEL: demand
-          SLACK_USERNAME: Pages
-          SLACK_TITLE: Release
+          SLACK_USERNAME: Release Announcer
+          SLACK_ICON: https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/1961e471-fe85-46fe-875e-0bc3f17f1f10/d5mpelq-8a7f9494-5d3e-40e0-ac81-ad159618c177.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzE5NjFlNDcxLWZlODUtNDZmZS04NzVlLTBiYzNmMTdmMWYxMFwvZDVtcGVscS04YTdmOTQ5NC01ZDNlLTQwZTAtYWM4MS1hZDE1OTYxOGMxNzcucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.mhv9rRYmcygRIAsDfhg6KOQ3EqyoHRiTQUzp2RTOWC8
+          SLACK_TITLE: ${{ steps.get_release.outputs.tag_name }}
           SLACK_MESSAGE: ':rocket: Pages `${{ steps.get_release.outputs.name }}` released!'
+          SLACK_FOOTER: ''
           MSG_MINIMAL: true
