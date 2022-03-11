@@ -45,7 +45,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "```${{ steps.get_release.outputs.body }}```"
+                    "text": "```${{ toJSON(steps.get_release.outputs.body) }}```"
                   }
                 },
                 {
