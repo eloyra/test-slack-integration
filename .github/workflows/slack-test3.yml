@@ -40,7 +40,3 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-
-
-      - name: Check
-        run: echo "Data: ${{ fromJson(steps.send_message.outputs) }}"
