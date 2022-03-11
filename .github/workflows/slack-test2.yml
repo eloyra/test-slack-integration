@@ -1,0 +1,40 @@
+on: 
+  release:
+    types: [created]
+name: Slack Notification Demo
+jobs:
+  slackNotification:
+    name: Slack Notification
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+    
+      - name: Get release
+        id: get_release
+        uses: bruceadams/get-release@v1.2.3
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+    
+      - name: Slack Notification
+        uses: slackapi/slack-github-action@v1.18.0
+        with:
+          payload: |
+            {
+              "channel": "demand",
+              "username": "Release Announcer",
+              "as_user": false,
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":rocket: Pages `${{ steps.get_release.outputs.name }}` released!"
+                  }
+                }
+              ] 
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
