@@ -15,6 +15,9 @@ jobs:
         uses: bruceadams/get-release@v1.2.3
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          
+      - name: Set Body
+        run: body=${{ toJSON(steps.get_release.outputs.body) }} && echo "RELEASE_BODY=\`\`\`$body\`\`\`" >> $GITHUB_ENV
 
     
       - name: Slack Notification
@@ -45,7 +48,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": '```${{ toJSON(steps.get_release.outputs.body) }}```'
+                    "text": "${{ env.RELEASE_BODY }}"
                   }
                 },
                 {
