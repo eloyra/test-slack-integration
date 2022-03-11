@@ -38,7 +38,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": ${{ steps.get_release.outputs.html_url }}
+                    "text": "${{ steps.get_release.outputs.html_url }}"
                   }
                 },
                 {
