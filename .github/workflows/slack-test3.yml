@@ -1,7 +1,7 @@
 on: 
   release:
     types: [created]
-name: Slack Notification Demo
+name: Slack Notification Demo 3
 jobs:
   slackNotification:
     name: Slack Notification
@@ -16,7 +16,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
-    
+
       - name: Slack Notification
         id: send_message
         uses: archive/github-actions-slack@v2.0.0
@@ -40,7 +40,7 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-          
-          
+
+
       - name: Check
-        run: echo "Data: ${{ steps.send_message.outputs }}"
+        run: echo "Data: ${{ fromJson(steps.send_message.outputs) }}"
