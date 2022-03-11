@@ -52,11 +52,23 @@ jobs:
                   }
                 },
                 {
-                  "type": "context",
-                  "elements": [
+                  "type": "section",
+                  "fields": [
                     {
                       "type": "mrkdwn",
-                      "text": "By ${{ fromJSON(steps.get_release.outputs.author).login }}"
+                      "text": "*Tag*"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Publisher*"
+                    },
+                    {
+                      "type": "plain_text",
+                      "text": "${{ steps.get_release.outputs.tag_name }}"
+                    },
+                    {
+                      "type": "plain_text",
+                      "text": "${{ fromJSON(steps.get_release.outputs.author).login }}"
                     }
                   ]
                 }
