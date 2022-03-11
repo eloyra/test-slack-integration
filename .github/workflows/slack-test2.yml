@@ -56,7 +56,7 @@ jobs:
                   "elements": [
                     {
                       "type": "mrkdwn",
-                      "text": "By ${{ steps.get_release.outputs.author.login }}"
+                      "text": "By ${{ fromJSON(steps.get_release.outputs.author).login }}"
                     }
                   ]
                 }
