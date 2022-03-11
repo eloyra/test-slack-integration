@@ -19,7 +19,7 @@ jobs:
 
       - name: Slack Notification
         id: send_message
-        uses: archive/github-actions-slack@v2.0.0
+        uses: slackapi/slack-github-action@v1.18.0
         with:
           payload: |
             {
