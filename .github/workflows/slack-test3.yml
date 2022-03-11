@@ -43,4 +43,4 @@ jobs:
           
           
       - name: Check
-        run: echo "Data: ${{ steps.send_message.outputs }}" 
+        run: echo "Data: ${{ steps.send_message.outputs }}"
