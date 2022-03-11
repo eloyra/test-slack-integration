@@ -33,6 +33,29 @@ jobs:
                     "type": "mrkdwn",
                     "text": ":rocket: Pages `${{ steps.get_release.outputs.name }}` released!"
                   }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ${{ steps.get_release.outputs.html_url }}
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "```${{ steps.get_release.outputs.body }}```"
+                  }
+                },
+                {
+                  "type": "context",
+                  "elements": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "By ${{ steps.get_release.outputs.author.login }}"
+                    }
+                  ]
                 }
               ] 
             }
