@@ -57,7 +57,7 @@ jobs:
                     },
                     {
                       "type": "plain_text",
-                      "text": "<${{ steps.get_release.outputs.html_url }}|${{ steps.get_release.outputs.tag_name }}>"
+                      "text": "[${{ steps.get_release.outputs.tag_name }}](${{ steps.get_release.outputs.html_url }})"
                     },
                     {
                       "type": "plain_text",
