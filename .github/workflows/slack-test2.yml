@@ -41,6 +41,13 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
+                    "text": "${{ steps.get_release.outputs.html_url }}"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
                     "text": "${{ env.RELEASE_BODY }}"
                   }
                 },
@@ -57,7 +64,7 @@ jobs:
                     },
                     {
                       "type": "plain_text",
-                      "text": "[${{ steps.get_release.outputs.tag_name }}](${{ steps.get_release.outputs.html_url }})"
+                      "text": "${{ steps.get_release.outputs.tag_name }}"
                     },
                     {
                       "type": "plain_text",
