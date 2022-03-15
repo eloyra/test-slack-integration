@@ -28,7 +28,7 @@ jobs:
               "channel": "demand",
               "username": "Release Announcer",
               "as_user": false,
-              "icon_url": "https://ih1.redbubble.net/image.781007202.8647/st,small,845x845-pad,1000x1000,f8f8f8.jpg",
+              "icon_url": "https://d2m46sh0bejigh.cloudfront.net/static/images/rebranding/homepage-2020-06/favicon-green.ico",
               "blocks": [
                 {
                   "type": "section",
