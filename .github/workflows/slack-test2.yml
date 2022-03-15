@@ -25,10 +25,6 @@ jobs:
         with:
           payload: |
             {
-              "channel": "demand",
-              "username": "Release Announcer",
-              "as_user": false,
-              "icon_url": "https://d2m46sh0bejigh.cloudfront.net/static/images/rebranding/homepage-2020-06/favicon-green.ico",
               "blocks": [
                 {
                   "type": "section",
