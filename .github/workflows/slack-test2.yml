@@ -1,6 +1,6 @@
 on: 
   release:
-    types: [created]
+    types: [published]
 name: Slack Notification Demo 2
 jobs:
   slackNotification:
