@@ -17,7 +17,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           
       - name: Set Body
-        run:  body=${{ toJSON(steps.get_release.outputs.body) }} && echo "RELEASE_BODY=\`\`\`$body\`\`\`" >> $GITHUB_ENV && echo $RELEASE_BODY
+        run:  body=${{ toJSON(steps.get_release.outputs.body) }} && echo -e "RELEASE_BODY=\`\`\`$body\`\`\`" >> $GITHUB_ENV
 
     
       - name: Slack Notification
