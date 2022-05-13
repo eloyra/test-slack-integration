@@ -32,9 +32,8 @@ jobs:
           slack-optional-unfurl_links: false
           slack-optional-unfurl_media: false
           slack-text: "Default message"
-          slack-block: |
-            {
-              "blocks": [
+          slack-blocks: |
+            [
                 {
                   "type": "section",
                   "text": {
@@ -71,7 +70,6 @@ jobs:
                   ]
                 }
               ] 
-            }
           
       - name: Slack Notification - Thread message
         uses: archive/github-actions-slack@v2.4.0
@@ -86,7 +84,8 @@ jobs:
           slack-optional-unfurl_links: false
           slack-optional-unfurl_media: false
           slack-optional-thread_ts: ${{ fromJson(steps.header-message.outputs.slack-result).response.message.ts }}
-          slack-text: |
+          slack-text: "Something"
+          slack-blocks: |
             {
               "blocks": [
                 {
