@@ -28,7 +28,6 @@ jobs:
           slack-channel: C0368182PKR
           slack-optional-username: Release Announcer
           slack-optional-icon_url: https://a.slack-edge.com/production-standard-emoji-assets/13.0/google-large/1f680.png
-          slack-optional-as_user: false
           slack-optional-unfurl_links: false
           slack-optional-unfurl_media: false
           slack-text: "Default message"
@@ -83,7 +82,6 @@ jobs:
           slack-channel: C0368182PKR
           slack-optional-username: Release Announcer
           slack-optional-icon_url: https://a.slack-edge.com/production-standard-emoji-assets/13.0/google-large/1f680.png
-          slack-optional-as_user: false
           slack-optional-unfurl_links: false
           slack-optional-unfurl_media: false
           slack-optional-thread_ts: ${{ fromJson(steps.header-message.outputs.slack-result).response.message.ts }}
