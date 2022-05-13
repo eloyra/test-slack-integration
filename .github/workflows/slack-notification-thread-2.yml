@@ -31,7 +31,8 @@ jobs:
           slack-optional-as_user: false
           slack-optional-unfurl_links: false
           slack-optional-unfurl_media: false
-          slack-text: |
+          slack-text: "Default message"
+          slack-block: |
             {
               "blocks": [
                 {
