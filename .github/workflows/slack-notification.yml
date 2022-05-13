@@ -6,12 +6,7 @@ jobs:
   slackNotification:
     name: Slack Notification
     runs-on: ubuntu-latest
-    steps:
-      - name: Setup Deno
-        uses: denoland/setup-deno@v1.1.0
-        with:
-          deno-version: v1.x
-    
+    steps:    
       - name: Checkout repository
         uses: actions/checkout@v2
     
