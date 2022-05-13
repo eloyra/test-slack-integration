@@ -1,0 +1,77 @@
+on: 
+  release:
+    types: [published]
+name: Slack Notification
+jobs:
+  slackNotification:
+    name: :rocket: Slack Notification
+    runs-on: ubuntu-latest
+    steps:    
+      - name: :arrow_heading_down: Checkout repository
+        uses: actions/checkout@v2
+    
+      - name: :recycle: Get release
+        id: get_release
+        uses: bruceadams/get-release@v1.2.3
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          
+      - name: :arrows_counterclockwise: Parse release body
+        run:  echo "RELEASE_BODY=\`\`\`$( echo '${{ toJSON(steps.get_release.outputs.body) }}' | sed -r 's/(")(.*)(")/\2/g' )\`\`\`" >> $GITHUB_ENV
+        
+      - name: :arrow_right: Slack Notification - Header message
+        uses: slackapi/slack-github-action@v1.19.0
+        id: header-message
+        with:
+          channel-id: C0368182PKR
+          icon_emoji: :rocket:
+          as_user: false
+          payload: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":rocket: Pages `${{ steps.get_release.outputs.name }}` released!"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "${{ steps.get_release.outputs.html_url }}"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "${{ env.RELEASE_BODY }}"
+                  }
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Tag*"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Publisher*"
+                    },
+                    {
+                      "type": "plain_text",
+                      "text": "${{ steps.get_release.outputs.tag_name }}"
+                    },
+                    {
+                      "type": "plain_text",
+                      "text": "${{ fromJSON(steps.get_release.outputs.author).login }}"
+                    }
+                  ]
+                }
+              ] 
+            }
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT }}
