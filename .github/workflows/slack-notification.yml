@@ -22,7 +22,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           
       - name: Parse release body
-        run:  touch tmp && cat ${{ steps.get_release.outputs.body }} >> tmp && body=$(deno run --allow-read https://gist.githubusercontent.com/eloyra/52bd7afcef7485c201d23b900e933175/raw/4e4f87e39d74b292400270775772f297cd6c08a0/parse-announcer-body.js './tmp' ) && echo "RELEASE_BODY=\`\`\`$body\`\`\`" >> $GITHUB_ENV
+        run:  touch tmp && ${{ toJSON(steps.get_release.outputs.body) }} >> tmp && body=$(deno run --allow-read https://gist.githubusercontent.com/eloyra/52bd7afcef7485c201d23b900e933175/raw/4e4f87e39d74b292400270775772f297cd6c08a0/parse-announcer-body.js './tmp' ) && echo "RELEASE_BODY=\`\`\`$body\`\`\`" >> $GITHUB_ENV
     
       - name: Slack Notification
         uses: slackapi/slack-github-action@v1.18.0
