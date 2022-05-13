@@ -4,7 +4,7 @@ on:
 name: Slack Notification
 jobs:
   slackNotification:
-    name: Slack Notification
+    name: Slack Notification With Thread
     runs-on: ubuntu-latest
     steps:    
       - name: Checkout repository
@@ -24,7 +24,7 @@ jobs:
         id: header-message
         with:
           channel-id: C0368182PKR
-          icon_emoji: ":rocket:"
+          icon_url: https://a.slack-edge.com/production-standard-emoji-assets/13.0/google-large/1f680.png
           as_user: false
           payload: |
             {
@@ -33,7 +33,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": ":rocket: Pages `${{ steps.get_release.outputs.name }}` released!"
+                    "text": ":rocket: Test `${{ steps.get_release.outputs.name }}` released!"
                   }
                 },
                 {
@@ -41,13 +41,6 @@ jobs:
                   "text": {
                     "type": "mrkdwn",
                     "text": "${{ steps.get_release.outputs.html_url }}"
-                  }
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "${{ env.RELEASE_BODY }}"
                   }
                 },
                 {
@@ -72,6 +65,29 @@ jobs:
                   ]
                 }
               ] 
+            }
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT }}
+          
+      - name: Slack Notification - Thread message
+        uses: slackapi/slack-github-action@v1.19.0
+        id: thread-message
+        with:
+          channel-id: C0368182PKR
+          icon_url: https://a.slack-edge.com/production-standard-emoji-assets/13.0/google-large/1f680.png
+          as_user: false
+          payload: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "${{ env.RELEASE_BODY }}"
+                  }
+                }
+              ],
+              "thread_ts": "${{ steps.header-message.outputs.thread_ts }}"
             }
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT }}
