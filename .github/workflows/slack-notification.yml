@@ -22,7 +22,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           
       - name: Parse release body
-        run:  echo "RELEASE_BODY=\`\`\`'${{ toJSON(steps.get_release.outputs.body) }}'\`\`\`" >> $GITHUB_ENV
+        run:  echo "RELEASE_BODY=\`\`\`$( echo '${{ toJSON(steps.get_release.outputs.body) }}' | sed 's/(").*(")//g' )\`\`\`" >> $GITHUB_ENV
     
       - name: Slack Notification
         uses: slackapi/slack-github-action@v1.18.0
