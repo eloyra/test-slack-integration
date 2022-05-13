@@ -4,22 +4,22 @@ on:
 name: Slack Notification
 jobs:
   slackNotification:
-    name: 🚀 Slack Notification
+    name: Slack Notification
     runs-on: ubuntu-latest
     steps:    
-      - name: ⬇️ Checkout repository
+      - name: Checkout repository
         uses: actions/checkout@v2
     
-      - name: ♻️ Get release
+      - name: Get release
         id: get_release
         uses: bruceadams/get-release@v1.2.3
         env:
           GITHUB_TOKEN: ${{ github.token }}
           
-      - name: 🔄 Parse release body
+      - name: Parse release body
         run:  echo "RELEASE_BODY=\`\`\`$( echo '${{ toJSON(steps.get_release.outputs.body) }}' | sed -r 's/(")(.*)(")/\2/g' )\`\`\`" >> $GITHUB_ENV
         
-      - name: ➡️ Slack Notification - Header message
+      - name: Slack Notification - Header message
         uses: slackapi/slack-github-action@v1.19.0
         id: header-message
         with:
@@ -73,5 +73,5 @@ jobs:
                 }
               ] 
             }
-      env:
-        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT }}
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT }}
