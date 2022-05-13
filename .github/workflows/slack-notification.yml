@@ -22,7 +22,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           
       - name: Parse release body
-        run:  raw=${{ toJSON(steps.get_release.outputs.body) }} && body=$(deno run ./.github/workflows/notification/release-body-parser.js $raw) && echo "RELEASE_BODY=\`\`\`$body\`\`\`" >> $GITHUB_ENV
+        run:  body=$(deno run ./.github/workflows/notification/release-body-parser.js ${{ toJSON(steps.get_release.outputs.body) }}) && echo "RELEASE_BODY=\`\`\`$body\`\`\`" >> $GITHUB_ENV
 
     
       - name: Slack Notification
