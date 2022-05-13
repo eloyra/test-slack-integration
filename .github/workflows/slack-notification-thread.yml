@@ -28,6 +28,7 @@ jobs:
           icon_url: https://a.slack-edge.com/production-standard-emoji-assets/13.0/google-large/1f680.png
           as_user: false
           unfurl_links: false
+          unfurl_media: false
           payload: |
             {
               "blocks": [
@@ -80,6 +81,7 @@ jobs:
           icon_url: https://a.slack-edge.com/production-standard-emoji-assets/13.0/google-large/1f680.png
           as_user: false
           unfurl_links: false
+          unfurl_media: false
           payload: |
             {
               "blocks": [
