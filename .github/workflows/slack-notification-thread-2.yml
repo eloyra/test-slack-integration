@@ -70,6 +70,9 @@ jobs:
                   ]
                 }
               ] 
+              
+      - name: Debug
+        run: echo ${{ steps.header-message.outputs.slack-result }}
           
       - name: Slack Notification - Thread message
         uses: archive/github-actions-slack@v2.4.0
