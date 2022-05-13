@@ -23,6 +23,7 @@ jobs:
         uses: archive/github-actions-slack@v2.4.0
         id: header-message
         with:
+          slack-function: send-message
           slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT }}
           slack-channel: C0368182PKR
           slack-optional-username: Release Announcer
@@ -75,6 +76,7 @@ jobs:
         uses: archive/github-actions-slack@v2.4.0
         id: thread-message
         with:
+          slack-function: send-message
           slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT }}
           slack-channel: C0368182PKR
           slack-optional-username: Release Announcer
