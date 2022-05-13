@@ -1,0 +1,99 @@
+on: 
+  release:
+    types: [published]
+name: Slack Notification
+jobs:
+  slackNotification:
+    name: Slack Notification With Thread 2
+    runs-on: ubuntu-latest
+    steps:    
+      - name: Checkout repository
+        uses: actions/checkout@v2
+    
+      - name: Get release
+        id: get_release
+        uses: bruceadams/get-release@v1.2.3
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          
+      - name: Parse release body
+        run:  echo "RELEASE_BODY=\`\`\`$( echo '${{ toJSON(steps.get_release.outputs.body) }}' | sed -r 's/(")(.*)(")/\2/g' )\`\`\`" >> $GITHUB_ENV
+        
+      - name: Slack Notification - Header message
+        uses: archive/github-actions-slack@v2.4.0
+        id: header-message
+        with:
+          slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT }}
+          slack-channel: C0368182PKR
+          slack-optional-username: Release Announcer
+          slack-optional-icon_url: https://a.slack-edge.com/production-standard-emoji-assets/13.0/google-large/1f680.png
+          slack-optional-as_user: false
+          slack-optional-unfurl_links: false
+          slack-optional-unfurl_media: false
+          slack-text: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":rocket: Test `${{ steps.get_release.outputs.name }}` released!"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "${{ steps.get_release.outputs.html_url }}"
+                  }
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Tag*"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Publisher*"
+                    },
+                    {
+                      "type": "plain_text",
+                      "text": "${{ steps.get_release.outputs.tag_name }}"
+                    },
+                    {
+                      "type": "plain_text",
+                      "text": "${{ fromJSON(steps.get_release.outputs.author).login }}"
+                    }
+                  ]
+                }
+              ] 
+            }
+          
+      - name: Slack Notification - Thread message
+        uses: archive/github-actions-slack@v2.4.0
+        id: thread-message
+        with:
+          slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT }}
+          slack-channel: C0368182PKR
+          slack-optional-username: Release Announcer
+          slack-optional-icon_url: https://a.slack-edge.com/production-standard-emoji-assets/13.0/google-large/1f680.png
+          slack-optional-as_user: false
+          slack-optional-unfurl_links: false
+          slack-optional-unfurl_media: false
+          slack-optional-thread_ts: ${{ fromJson(steps.header-message.outputs.slack-result).response.message.ts }}
+          payload: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "${{ env.RELEASE_BODY }}"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT }}
