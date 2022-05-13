@@ -83,7 +83,7 @@ jobs:
           slack-optional-unfurl_links: false
           slack-optional-unfurl_media: false
           slack-optional-thread_ts: ${{ fromJson(steps.header-message.outputs.slack-result).response.message.ts }}
-          payload: |
+          slack-text: |
             {
               "blocks": [
                 {
