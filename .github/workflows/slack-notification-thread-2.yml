@@ -30,7 +30,7 @@ jobs:
           slack-optional-icon_url: https://a.slack-edge.com/production-standard-emoji-assets/13.0/google-large/1f680.png
           slack-optional-unfurl_links: false
           slack-optional-unfurl_media: false
-          slack-text: "Default message"
+          slack-text: ":rocket: Test `${{ steps.get_release.outputs.name }}` released!"
           slack-optional-blocks: |
             [
                 {
@@ -68,10 +68,7 @@ jobs:
                     }
                   ]
                 }
-              ] 
-              
-      - name: Debug
-        run: echo "${{ steps.header-message.outputs.slack-result }}"
+              ]
           
       - name: Slack Notification - Thread message
         uses: archive/github-actions-slack@v2.4.0
@@ -85,10 +82,9 @@ jobs:
           slack-optional-unfurl_links: false
           slack-optional-unfurl_media: false
           slack-optional-thread_ts: ${{ fromJson(steps.header-message.outputs.slack-result).response.message.ts }}
-          slack-text: "Something"
+          slack-text: "<Something went wrong sending the body>"
           slack-optional-blocks: |
-            {
-              "blocks": [
+            [
                 {
                   "type": "section",
                   "text": {
@@ -97,4 +93,3 @@ jobs:
                   }
                 }
               ]
-            }
